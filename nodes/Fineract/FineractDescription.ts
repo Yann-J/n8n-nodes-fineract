@@ -59,6 +59,16 @@ export const fineractOperations: INodeProperties[] = [
 						method: 'GET',
 						url: '/clients',
 					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'pageItems',
+								},
+							},
+						],
+					},
 				},
 			},
 			{
@@ -144,6 +154,16 @@ export const fineractOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/loans',
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'pageItems',
+								},
+							},
+						],
 					},
 				},
 			},
