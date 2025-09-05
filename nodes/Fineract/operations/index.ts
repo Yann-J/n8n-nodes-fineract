@@ -358,28 +358,6 @@ export const fineractOperations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'Get Many',
-				value: 'getAll',
-				description: 'Get many loans (Note: Limited to API max results per page)',
-				action: 'Get many loans',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '/loans',
-					},
-					output: {
-						postReceive: [
-							{
-								type: 'rootProperty',
-								properties: {
-									property: 'pageItems',
-								},
-							},
-						],
-					},
-				},
-			},
-			{
 				name: 'List',
 				value: 'list',
 				description: 'List all loans',

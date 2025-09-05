@@ -60,7 +60,7 @@ export const loanListOperation: INodeProperties[] = [
 		name: 'offset',
 		type: 'number',
 		default: 0,
-		description: 'Number of records to skip',
+		description: 'Indicates from what result to start from',
 		displayOptions: {
 			show: {
 				resource: ['loan'],
@@ -76,11 +76,80 @@ export const loanListOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Client ID',
-		name: 'clientId',
-		type: 'string',
+		displayName: 'Order By',
+		name: 'orderBy',
+		type: 'options',
+		default: 'accountNo',
+		description: 'Orders the results by the field indicated',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['list'],
+			},
+		},
+		options: [
+			{
+				name: 'Display Name',
+				value: 'displayName',
+			},
+			{
+				name: 'Account No',
+				value: 'accountNo',
+			},
+			{
+				name: 'Office ID',
+				value: 'officeId',
+			},
+			{
+				name: 'Office Name',
+				value: 'officeName',
+			},
+		],
+		routing: {
+			send: {
+				property: 'orderBy',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Sort Order',
+		name: 'sortBy',
+		type: 'options',
+		default: 'ASC',
+		description: 'Indicates what way to order results if orderBy is used',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['list'],
+			},
+		},
+		options: [
+			{
+				name: 'Ascending',
+				value: 'ASC',
+			},
+			{
+				name: 'Descending',
+				value: 'DESC',
+			},
+		],
+		routing: {
+			send: {
+				property: 'sortBy',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Office ID',
+		name: 'officeId',
+		type: 'number',
 		default: '',
-		description: 'Filter loans by client ID',
+		description:
+			'Provides ability to restrict list of loans returned based on the office they are associated with',
 		displayOptions: {
 			show: {
 				resource: ['loan'],
@@ -89,8 +158,90 @@ export const loanListOperation: INodeProperties[] = [
 		},
 		routing: {
 			send: {
-				property: 'clientId',
+				property: 'officeId',
 				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Under Hierarchy',
+		name: 'underHierarchy',
+		type: 'string',
+		default: '',
+		description: 'Use the office hierarchy string to return all loans under a given hierarchy',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['list'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'underHierarchy',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Account No',
+		name: 'accountNo',
+		type: 'string',
+		default: '',
+		description: 'Use account no. of loans to restrict results.',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['list'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'accountNo',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'Use externalId of loan to restrict results',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['list'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'SQL Search',
+		name: 'sqlSearch',
+		type: 'string',
+		default: '',
+		description:
+			'Use an sql fragment valid for the underlying loan schema to filter results. e.g. display_name like %K%.',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['list'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'sqlSearch',
+				type: 'query',
+				value: '={{ $value || undefined }}',
 			},
 		},
 	},
@@ -98,7 +249,7 @@ export const loanListOperation: INodeProperties[] = [
 		displayName: 'Loan Status',
 		name: 'status',
 		type: 'options',
-		default: 'all',
+		default: '',
 		description: 'Filter loans by status',
 		displayOptions: {
 			show: {
@@ -113,7 +264,7 @@ export const loanListOperation: INodeProperties[] = [
 			},
 			{
 				name: 'All',
-				value: 'all',
+				value: '',
 			},
 			{
 				name: 'Approved',
@@ -140,6 +291,7 @@ export const loanListOperation: INodeProperties[] = [
 			send: {
 				property: 'status',
 				type: 'query',
+				value: '={{ $value || undefined }}',
 			},
 		},
 	},
