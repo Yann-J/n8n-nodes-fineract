@@ -2,11 +2,42 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const loanListOperation: INodeProperties[] = [
 	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['list'],
+			},
+		},
+		default: false,
+		description:
+			'Whether to return all results or only up to a given limit (WARNING: This will increase the number of requests and may cause timeouts)',
+		routing: {
+			send: {
+				paginate: '={{ $value }}',
+			},
+			operations: {
+				pagination: {
+					type: 'offset',
+					properties: {
+						limitParameter: 'limit',
+						offsetParameter: 'offset',
+						pageSize: 200,
+						type: 'query',
+					},
+				},
+			},
+		},
+	},
+	{
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
 		typeOptions: {
 			minValue: 1,
+			maxValue: 200,
 		},
 		default: 50,
 		description: 'Max number of results to return',
@@ -14,6 +45,7 @@ export const loanListOperation: INodeProperties[] = [
 			show: {
 				resource: ['loan'],
 				operation: ['list'],
+				returnAll: [false],
 			},
 		},
 		routing: {
@@ -33,6 +65,7 @@ export const loanListOperation: INodeProperties[] = [
 			show: {
 				resource: ['loan'],
 				operation: ['list'],
+				returnAll: [false],
 			},
 		},
 		routing: {
