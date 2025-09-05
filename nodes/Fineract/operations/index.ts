@@ -1,7 +1,7 @@
+/* eslint-disable n8n-nodes-base/node-param-options-type-unsorted-items */
 import { INodeProperties } from 'n8n-workflow';
 import {
 	clientListOperation,
-	clientGetAllOperation,
 	clientGetOperation,
 	clientCreateOperation,
 	clientUpdateOperation,
@@ -24,7 +24,6 @@ import {
 } from './clientOperations';
 import {
 	loanListOperation,
-	loanGetAllOperation,
 	loanGetOperation,
 	loanCreateOperation,
 	loanUpdateOperation,
@@ -79,28 +78,6 @@ export const fineractOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/clients/{{ $parameter.clientId }}',
-					},
-				},
-			},
-			{
-				name: 'Get Many',
-				value: 'getAll',
-				description: 'Get many clients (Note: Limited to API max results per page)',
-				action: 'Get many clients',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '/clients',
-					},
-					output: {
-						postReceive: [
-							{
-								type: 'rootProperty',
-								properties: {
-									property: 'pageItems',
-								},
-							},
-						],
 					},
 				},
 			},
@@ -456,7 +433,6 @@ export const fineractOperations: INodeProperties[] = [
 export const fineractFields: INodeProperties[] = [
 	// Client operations
 	...clientListOperation,
-	...clientGetAllOperation,
 	...clientGetOperation,
 	...clientCreateOperation,
 	...clientUpdateOperation,
@@ -478,7 +454,6 @@ export const fineractFields: INodeProperties[] = [
 	...clientProposeAndAcceptTransferOperation,
 	// Loan operations
 	...loanListOperation,
-	...loanGetAllOperation,
 	...loanGetOperation,
 	...loanCreateOperation,
 	...loanUpdateOperation,
