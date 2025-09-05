@@ -52,15 +52,12 @@ export const fineractOperations: INodeProperties[] = [
 			{
 				name: 'Get Many',
 				value: 'getAll',
-				description: 'Get many clients (handles pagination automatically)',
+				description: 'Get many clients (Note: Limited to API max results per page)',
 				action: 'Get many clients',
 				routing: {
 					request: {
 						method: 'GET',
 						url: '/clients',
-					},
-					send: {
-						paginate: true,
 					},
 					output: {
 						postReceive: [
@@ -173,15 +170,12 @@ export const fineractOperations: INodeProperties[] = [
 			{
 				name: 'Get Many',
 				value: 'getAll',
-				description: 'Get many loans (handles pagination automatically)',
+				description: 'Get many loans (Note: Limited to API max results per page)',
 				action: 'Get many loans',
 				routing: {
 					request: {
 						method: 'GET',
 						url: '/loans',
-					},
-					send: {
-						paginate: true,
 					},
 					output: {
 						postReceive: [
@@ -453,7 +447,7 @@ const clientListOperation: INodeProperties[] = [
 		displayName: 'Order By',
 		name: 'orderBy',
 		type: 'options',
-		default: 'id',
+		default: 'accountNo',
 		description: 'Order results by field',
 		displayOptions: {
 			show: {
@@ -463,20 +457,20 @@ const clientListOperation: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'ID',
-				value: 'id',
-			},
-			{
 				name: 'Display Name',
 				value: 'displayName',
 			},
 			{
-				name: 'Office',
-				value: 'office',
+				name: 'Account No',
+				value: 'accountNo',
 			},
 			{
-				name: 'Status',
-				value: 'status',
+				name: 'Office ID',
+				value: 'officeId',
+			},
+			{
+				name: 'Office Name',
+				value: 'officeName',
 			},
 		],
 		routing: {
