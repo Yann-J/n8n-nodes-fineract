@@ -615,3 +615,548 @@ export const clientDeleteOperation: INodeProperties[] = [
 		},
 	},
 ];
+
+// Client Command Operations
+export const clientActivateOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to activate',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['activate'],
+			},
+		},
+	},
+	{
+		displayName: 'Activation Date',
+		name: 'activationDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the client should be activated (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['activate'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'activationDate',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientCloseOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to close',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['close'],
+			},
+		},
+	},
+	{
+		displayName: 'Closure Date',
+		name: 'closureDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the client should be closed (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['close'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'closureDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Closure Reason ID',
+		name: 'closureReasonId',
+		type: 'number',
+		default: '',
+		description: 'ID of the reason for closing the client',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['close'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'closureReasonId',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientRejectOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to reject',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['reject'],
+			},
+		},
+	},
+	{
+		displayName: 'Rejection Date',
+		name: 'rejectionDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the client should be rejected (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['reject'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'rejectionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Rejection Reason ID',
+		name: 'rejectionReasonId',
+		type: 'number',
+		default: '',
+		description: 'ID of the reason for rejecting the client',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['reject'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'rejectionReasonId',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientWithdrawOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to withdraw',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['withdraw'],
+			},
+		},
+	},
+	{
+		displayName: 'Withdrawal Date',
+		name: 'withdrawalDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the client should be withdrawn (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['withdraw'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'withdrawalDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Withdrawal Reason ID',
+		name: 'withdrawalReasonId',
+		type: 'number',
+		default: '',
+		description: 'ID of the reason for withdrawing the client',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['withdraw'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'withdrawalReasonId',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientReactivateOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to reactivate',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['reactivate'],
+			},
+		},
+	},
+	{
+		displayName: 'Reactivation Date',
+		name: 'reactivationDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the client should be reactivated (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['reactivate'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'reactivationDate',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientUndoRejectionOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to undo rejection',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['undoRejection'],
+			},
+		},
+	},
+];
+
+export const clientUndoWithdrawalOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to undo withdrawal',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['undoWithdrawal'],
+			},
+		},
+	},
+];
+
+export const clientAssignStaffOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to assign staff to',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['assignStaff'],
+			},
+		},
+	},
+	{
+		displayName: 'Staff ID',
+		name: 'staffId',
+		type: 'number',
+		default: '',
+		required: true,
+		description: 'ID of the staff member to assign to the client',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['assignStaff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'staffId',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientUnassignStaffOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to unassign staff from',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['unassignStaff'],
+			},
+		},
+	},
+];
+
+export const clientProposeTransferOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to propose transfer for',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['proposeTransfer'],
+			},
+		},
+	},
+	{
+		displayName: 'Destination Office ID',
+		name: 'destinationOfficeId',
+		type: 'number',
+		default: '',
+		required: true,
+		description: 'ID of the office to transfer the client to',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['proposeTransfer'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'destinationOfficeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transfer Date',
+		name: 'transferDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the transfer should occur (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['proposeTransfer'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transferDate',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientWithdrawTransferOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to withdraw transfer for',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['withdrawTransfer'],
+			},
+		},
+	},
+];
+
+export const clientAcceptTransferOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to accept transfer for',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['acceptTransfer'],
+			},
+		},
+	},
+	{
+		displayName: 'Transfer Date',
+		name: 'transferDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the transfer should occur (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['acceptTransfer'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transferDate',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientRejectTransferOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to reject transfer for',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['rejectTransfer'],
+			},
+		},
+	},
+];
+
+export const clientUpdateSavingsAccountOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to update savings account for',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['updateSavingsAccount'],
+			},
+		},
+	},
+	{
+		displayName: 'Savings Account ID',
+		name: 'savingsAccountId',
+		type: 'number',
+		default: '',
+		required: true,
+		description: 'ID of the savings account to set as default',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['updateSavingsAccount'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'savingsAccountId',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const clientProposeAndAcceptTransferOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the client to propose and accept transfer for',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['proposeAndAcceptTransfer'],
+			},
+		},
+	},
+	{
+		displayName: 'Destination Office ID',
+		name: 'destinationOfficeId',
+		type: 'number',
+		default: '',
+		required: true,
+		description: 'ID of the office to transfer the client to',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['proposeAndAcceptTransfer'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'destinationOfficeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transfer Date',
+		name: 'transferDate',
+		type: 'dateTime',
+		default: '',
+		description: 'Date when the transfer should occur (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['proposeAndAcceptTransfer'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transferDate',
+				type: 'body',
+			},
+		},
+	},
+];

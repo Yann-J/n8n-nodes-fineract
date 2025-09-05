@@ -6,6 +6,21 @@ import {
 	clientCreateOperation,
 	clientUpdateOperation,
 	clientDeleteOperation,
+	clientActivateOperation,
+	clientCloseOperation,
+	clientRejectOperation,
+	clientWithdrawOperation,
+	clientReactivateOperation,
+	clientUndoRejectionOperation,
+	clientUndoWithdrawalOperation,
+	clientAssignStaffOperation,
+	clientUnassignStaffOperation,
+	clientProposeTransferOperation,
+	clientWithdrawTransferOperation,
+	clientAcceptTransferOperation,
+	clientRejectTransferOperation,
+	clientUpdateSavingsAccountOperation,
+	clientProposeAndAcceptTransferOperation,
 } from './clientOperations';
 import {
 	loanListOperation,
@@ -120,6 +135,186 @@ export const fineractOperations: INodeProperties[] = [
 					request: {
 						method: 'PUT',
 						url: '=/clients/{{ $parameter.clientId }}',
+					},
+				},
+			},
+			{
+				name: 'Activate',
+				value: 'activate',
+				description: 'Activate a client',
+				action: 'Activate a client',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=activate',
+					},
+				},
+			},
+			{
+				name: 'Close',
+				value: 'close',
+				description: 'Close a client',
+				action: 'Close a client',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=close',
+					},
+				},
+			},
+			{
+				name: 'Reject',
+				value: 'reject',
+				description: 'Reject a client application',
+				action: 'Reject a client',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=reject',
+					},
+				},
+			},
+			{
+				name: 'Withdraw',
+				value: 'withdraw',
+				description: 'Withdraw a client application',
+				action: 'Withdraw a client',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=withdraw',
+					},
+				},
+			},
+			{
+				name: 'Reactivate',
+				value: 'reactivate',
+				description: 'Reactivate a closed client',
+				action: 'Reactivate a client',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=reactivate',
+					},
+				},
+			},
+			{
+				name: 'Undo Rejection',
+				value: 'undoRejection',
+				description: 'Undo rejection of a client',
+				action: 'Undo client rejection',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=UndoRejection',
+					},
+				},
+			},
+			{
+				name: 'Undo Withdrawal',
+				value: 'undoWithdrawal',
+				description: 'Undo withdrawal of a client',
+				action: 'Undo client withdrawal',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=UndoWithdrawal',
+					},
+				},
+			},
+			{
+				name: 'Assign Staff',
+				value: 'assignStaff',
+				description: 'Assign staff to a client',
+				action: 'Assign staff to client',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=assignStaff',
+					},
+				},
+			},
+			{
+				name: 'Unassign Staff',
+				value: 'unassignStaff',
+				description: 'Unassign staff from a client',
+				action: 'Unassign staff from client',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=unassignStaff',
+					},
+				},
+			},
+			{
+				name: 'Propose Transfer',
+				value: 'proposeTransfer',
+				description: 'Propose transfer of a client to another office',
+				action: 'Propose client transfer',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=proposeTransfer',
+					},
+				},
+			},
+			{
+				name: 'Withdraw Transfer',
+				value: 'withdrawTransfer',
+				description: 'Withdraw a proposed client transfer',
+				action: 'Withdraw client transfer',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=withdrawTransfer',
+					},
+				},
+			},
+			{
+				name: 'Accept Transfer',
+				value: 'acceptTransfer',
+				description: 'Accept a proposed client transfer',
+				action: 'Accept client transfer',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=acceptTransfer',
+					},
+				},
+			},
+			{
+				name: 'Reject Transfer',
+				value: 'rejectTransfer',
+				description: 'Reject a proposed client transfer',
+				action: 'Reject client transfer',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=rejectTransfer',
+					},
+				},
+			},
+			{
+				name: 'Update Savings Account',
+				value: 'updateSavingsAccount',
+				description: 'Update default savings account for a client',
+				action: 'Update client savings account',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=updateSavingsAccount',
+					},
+				},
+			},
+			{
+				name: 'Propose and Accept Transfer',
+				value: 'proposeAndAcceptTransfer',
+				description: 'Propose and accept client transfer in one step',
+				action: 'Propose and accept client transfer',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/clients/{{ $parameter.clientId }}?command=proposeAndAcceptTransfer',
 					},
 				},
 			},
@@ -266,6 +461,21 @@ export const fineractFields: INodeProperties[] = [
 	...clientCreateOperation,
 	...clientUpdateOperation,
 	...clientDeleteOperation,
+	...clientActivateOperation,
+	...clientCloseOperation,
+	...clientRejectOperation,
+	...clientWithdrawOperation,
+	...clientReactivateOperation,
+	...clientUndoRejectionOperation,
+	...clientUndoWithdrawalOperation,
+	...clientAssignStaffOperation,
+	...clientUnassignStaffOperation,
+	...clientProposeTransferOperation,
+	...clientWithdrawTransferOperation,
+	...clientAcceptTransferOperation,
+	...clientRejectTransferOperation,
+	...clientUpdateSavingsAccountOperation,
+	...clientProposeAndAcceptTransferOperation,
 	// Loan operations
 	...loanListOperation,
 	...loanGetAllOperation,
