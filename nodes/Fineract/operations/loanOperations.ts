@@ -1,3 +1,5 @@
+/* eslint-disable n8n-nodes-base/node-param-type-options-max-value-present */
+/* eslint-disable n8n-nodes-base/node-param-description-wrong-for-return-all */
 import { INodeProperties } from 'n8n-workflow';
 
 export const loanListOperation: INodeProperties[] = [
@@ -309,6 +311,27 @@ export const loanGetOperation: INodeProperties[] = [
 			show: {
 				resource: ['loan'],
 				operation: ['get'],
+			},
+		},
+	},
+	{
+		displayName: 'Fields',
+		name: 'fields',
+		type: 'string',
+		default: '',
+		description:
+			'Comma-separated list of fields to include in the response (e.g. ID,accountNo,status)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['get', 'list'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'fields',
+				type: 'query',
+				value: '={{ $value || undefined }}',
 			},
 		},
 	},
