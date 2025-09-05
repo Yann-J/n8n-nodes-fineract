@@ -50,6 +50,31 @@ export const fineractOperations: INodeProperties[] = [
 				},
 			},
 			{
+				name: 'Get Many',
+				value: 'getAll',
+				description: 'Get many clients (handles pagination automatically)',
+				action: 'Get many clients',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/clients',
+					},
+					send: {
+						paginate: true,
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'pageItems',
+								},
+							},
+						],
+					},
+				},
+			},
+			{
 				name: 'List',
 				value: 'list',
 				description: 'List all clients',
@@ -142,6 +167,31 @@ export const fineractOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/loans/{{ $parameter.loanId }}',
+					},
+				},
+			},
+			{
+				name: 'Get Many',
+				value: 'getAll',
+				description: 'Get many loans (handles pagination automatically)',
+				action: 'Get many loans',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/loans',
+					},
+					send: {
+						paginate: true,
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'pageItems',
+								},
+							},
+						],
 					},
 				},
 			},
@@ -240,25 +290,236 @@ const clientListOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Search Query',
-		name: 'search',
+		displayName: 'Display Name',
+		name: 'displayName',
 		type: 'string',
 		default: '',
-		description: 'Search query to filter clients',
+		description: 'Filter clients by display name (partial match)',
 		displayOptions: {
 			show: {
 				resource: ['client'],
-				operation: ['list'],
+				operation: ['list', 'getAll'],
 			},
 		},
 		routing: {
 			send: {
-				property: 'search',
+				property: 'displayName',
 				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Office ID',
+		name: 'officeId',
+		type: 'number',
+		default: '',
+		description: 'Filter clients by office ID',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'officeId',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Under Hierarchy',
+		name: 'underHierarchy',
+		type: 'string',
+		default: '',
+		description: 'Filter clients under a specific hierarchy (office hierarchy path)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'underHierarchy',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'Filter clients by external ID',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'First Name',
+		name: 'firstName',
+		type: 'string',
+		default: '',
+		description: 'Filter clients by first name',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'firstName',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Last Name',
+		name: 'lastName',
+		type: 'string',
+		default: '',
+		description: 'Filter clients by last name',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'lastName',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Orphans Only',
+		name: 'orphansOnly',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to show only orphaned clients (clients without groups)',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'orphansOnly',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'SQL Search',
+		name: 'sqlSearch',
+		type: 'string',
+		default: '',
+		description: 'Custom SQL search query for advanced filtering',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'sqlSearch',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Order By',
+		name: 'orderBy',
+		type: 'options',
+		default: 'id',
+		description: 'Order results by field',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		options: [
+			{
+				name: 'ID',
+				value: 'id',
+			},
+			{
+				name: 'Display Name',
+				value: 'displayName',
+			},
+			{
+				name: 'Office',
+				value: 'office',
+			},
+			{
+				name: 'Status',
+				value: 'status',
+			},
+		],
+		routing: {
+			send: {
+				property: 'orderBy',
+				type: 'query',
+				value: '={{ $value || undefined }}',
+			},
+		},
+	},
+	{
+		displayName: 'Sort Order',
+		name: 'sortOrder',
+		type: 'options',
+		default: 'ASC',
+		description: 'Sort order for results',
+		displayOptions: {
+			show: {
+				resource: ['client'],
+				operation: ['list', 'getAll'],
+			},
+		},
+		options: [
+			{
+				name: 'Ascending',
+				value: 'ASC',
+			},
+			{
+				name: 'Descending',
+				value: 'DESC',
+			},
+		],
+		routing: {
+			send: {
+				property: 'sortOrder',
+				type: 'query',
+				value: '={{ $value || undefined }}',
 			},
 		},
 	},
 ];
+
+const clientGetAllOperation: INodeProperties[] = [];
 
 const clientGetOperation: INodeProperties[] = [
 	{
@@ -674,6 +935,77 @@ const loanListOperation: INodeProperties[] = [
 			show: {
 				resource: ['loan'],
 				operation: ['list'],
+			},
+		},
+		options: [
+			{
+				name: 'Active',
+				value: 'active',
+			},
+			{
+				name: 'All',
+				value: 'all',
+			},
+			{
+				name: 'Approved',
+				value: 'approved',
+			},
+			{
+				name: 'Closed (Obligations Met)',
+				value: 'closedObligationsMet',
+			},
+			{
+				name: 'Closed (Rescheduled)',
+				value: 'closedRescheduled',
+			},
+			{
+				name: 'Closed (Written Off)',
+				value: 'closedWrittenOff',
+			},
+			{
+				name: 'Submitted and Pending Approval',
+				value: 'submittedAndPendingApproval',
+			},
+		],
+		routing: {
+			send: {
+				property: 'status',
+				type: 'query',
+			},
+		},
+	},
+];
+
+const loanGetAllOperation: INodeProperties[] = [
+	{
+		displayName: 'Client ID',
+		name: 'clientId',
+		type: 'string',
+		default: '',
+		description: 'Filter loans by client ID',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'clientId',
+				type: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Loan Status',
+		name: 'status',
+		type: 'options',
+		default: 'all',
+		description: 'Filter loans by status',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['getAll'],
 			},
 		},
 		options: [
@@ -1271,12 +1603,14 @@ const loanRepayOperation: INodeProperties[] = [
 export const fineractFields: INodeProperties[] = [
 	// Client operations
 	...clientListOperation,
+	...clientGetAllOperation,
 	...clientGetOperation,
 	...clientCreateOperation,
 	...clientUpdateOperation,
 	...clientDeleteOperation,
 	// Loan operations
 	...loanListOperation,
+	...loanGetAllOperation,
 	...loanGetOperation,
 	...loanCreateOperation,
 	...loanUpdateOperation,
