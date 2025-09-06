@@ -220,7 +220,7 @@ The Loan resource provides comprehensive loan lifecycle management with the foll
 
 ## API Documentation
 
-For detailed information about the Fineract API, refer to the [official documentation](https://mifosforge.jira.com/wiki/spaces/docs/pages/52096789/API+Documentation).
+For detailed information about the Fineract API, refer to the [official documentation](https://demo.mifos.io/api-docs/apiLive.htm).
 
 ### Fineract API Endpoints Used
 
@@ -254,7 +254,7 @@ For detailed information about the Fineract API, refer to the [official document
 ### Getting Help
 
 1. Check the [GitHub Issues](https://github.com/Yann-J/n8n-nodes-fineract/issues) for known problems
-2. Review the [Fineract API documentation](https://mifosforge.jira.com/wiki/spaces/docs/pages/52096789/API+Documentation)
+2. Review the [Fineract API documentation](https://demo.mifos.io/api-docs/apiLive.htm)
 3. Create a new issue with detailed error information
 
 ## Contributing
@@ -283,16 +283,6 @@ We welcome contributions! Here's how you can help:
 - Include detailed reproduction steps
 - Provide error messages and logs
 - Specify your n8n and Fineract versions
-
-## Changelog
-
-### v0.1.0
-
-- Initial release with comprehensive Fineract API support
-- 20 client operations including lifecycle management
-- 15 loan operations including transaction management
-- Advanced filtering and pagination support
-- OIDC and username/password authentication
 
 ## License
 
