@@ -145,7 +145,6 @@ jobs:
           git add package.json package-lock.json
           git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
           git tag "v${{ env.NEW_VERSION }}"
-          # git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git push origin main
           git push origin "v${{ env.NEW_VERSION }}"
 
@@ -158,10 +157,10 @@ jobs:
       - name: Run prepublish checks
         run: npm run prepublishOnly
 
-      # - name: Verify NPM authentication
-      #   run: npm whoami
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Verify NPM authentication
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM (from patch commit)
         run: npm publish
