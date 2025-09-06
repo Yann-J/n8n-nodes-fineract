@@ -145,6 +145,9 @@ jobs:
           git push origin main
           git push origin "v${{ env.NEW_VERSION }}"
 
+      - name: Verify NPM authentication
+        run: npm whoami
+
       - name: Publish to NPM (from patch commit)
         run: npm publish
         env:
