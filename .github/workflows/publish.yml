@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*'
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       version:
@@ -45,6 +47,30 @@ jobs:
 
       - name: Run prepublish checks
         run: npm run prepublishOnly
+
+      - name: Publish to NPM (from patch commit)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          npm version patch --no-git-tag-version
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Create and push tag (from patch commit)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add package.json package-lock.json
+          git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
+          git tag "v${{ env.NEW_VERSION }}"
+          git push origin main
+          git push origin "v${{ env.NEW_VERSION }}"
+
+      - name: Publish to NPM (from patch commit)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM (from tag)
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
@@ -88,27 +114,3 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create GitHub Release
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
-          body: |
-            ## Changes in this Release
-
-            - Enhanced loan operations with comprehensive Fineract API support
-            - Added 12 new loan transaction commands
-            - Improved error handling and validation
-            - Updated documentation and examples
-
-            ## Installation
-
-            ```bash
-            npm install n8n-nodes-fineract
-            ```
-          draft: false
-          prerelease: false
