@@ -5,5 +5,5 @@
 [x] Break down the operation definitions into smaller files
 [ ] Implement client commands
 [ ] Fix the filter on `clientId` for Get Loans
-[ ] Implement loan commands
+[x] Implement loan commands
 [ ] Implement a `Get ALL` method for resources that will take care of pagination

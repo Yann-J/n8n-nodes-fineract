@@ -872,3 +872,1217 @@ export const loanRepayOperation: INodeProperties[] = [
 		},
 	},
 ];
+
+export const loanWaiveInterestOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to waive interest for',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['waiveInterest'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the interest waiver transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['waiveInterest'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount of interest to waive',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['waiveInterest'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the interest waiver transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['waiveInterest'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the interest waiver transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['waiveInterest'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanWriteOffOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to write off',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['writeOff'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the write off transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['writeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount to write off',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['writeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the write off transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['writeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the write off transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['writeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanCloseOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to close',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['close'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the loan closure transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['close'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the loan closure transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['close'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the loan closure transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['close'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanUndoWriteOffOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to undo write off for',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['undoWriteOff'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the undo write off transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['undoWriteOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the undo write off transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['undoWriteOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the undo write off transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['undoWriteOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanRecoveryPaymentOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to record recovery payment for',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['recoveryPayment'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the recovery payment transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['recoveryPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount of the recovery payment',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['recoveryPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Payment Type ID',
+		name: 'paymentTypeId',
+		type: 'string',
+		default: '',
+		description: 'Payment type ID for the recovery payment',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['recoveryPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'paymentTypeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the recovery payment transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['recoveryPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the recovery payment transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['recoveryPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanRefundByCashOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to process refund for',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['refundByCash'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the refund transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['refundByCash'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount of the refund',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['refundByCash'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Payment Type ID',
+		name: 'paymentTypeId',
+		type: 'string',
+		default: '',
+		description: 'Payment type ID for the refund',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['refundByCash'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'paymentTypeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the refund transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['refundByCash'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the refund transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['refundByCash'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanForeclosureOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to foreclose',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['foreclosure'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the foreclosure transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['foreclosure'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount for the foreclosure',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['foreclosure'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the foreclosure transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['foreclosure'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the foreclosure transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['foreclosure'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanCreditBalanceRefundOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to process credit balance refund for',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['creditBalanceRefund'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the credit balance refund transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['creditBalanceRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount of the credit balance refund',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['creditBalanceRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Payment Type ID',
+		name: 'paymentTypeId',
+		type: 'string',
+		default: '',
+		description: 'Payment type ID for the credit balance refund',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['creditBalanceRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'paymentTypeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the credit balance refund transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['creditBalanceRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the credit balance refund transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['creditBalanceRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanChargeOffOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to charge off',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['chargeOff'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the charge off transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['chargeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount to charge off',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['chargeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the charge off transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['chargeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the charge off transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['chargeOff'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanDownPaymentOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to record down payment for',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['downPayment'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the down payment transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['downPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount of the down payment',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['downPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Payment Type ID',
+		name: 'paymentTypeId',
+		type: 'string',
+		default: '',
+		description: 'Payment type ID for the down payment',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['downPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'paymentTypeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the down payment transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['downPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the down payment transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['downPayment'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanMerchantIssuedRefundOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to process merchant issued refund for',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['merchantIssuedRefund'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the merchant issued refund transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['merchantIssuedRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount of the merchant issued refund',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['merchantIssuedRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Payment Type ID',
+		name: 'paymentTypeId',
+		type: 'string',
+		default: '',
+		description: 'Payment type ID for the merchant issued refund',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['merchantIssuedRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'paymentTypeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the merchant issued refund transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['merchantIssuedRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the merchant issued refund transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['merchantIssuedRefund'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];
+
+export const loanGoodwillCreditOperation: INodeProperties[] = [
+	{
+		displayName: 'Loan ID',
+		name: 'loanId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The ID of the loan to apply goodwill credit to',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['goodwillCredit'],
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Date',
+		name: 'transactionDate',
+		type: 'dateTime',
+		default: '',
+		required: true,
+		description: 'Date of the goodwill credit transaction (YYYY-MM-DD format)',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['goodwillCredit'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionDate',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Transaction Amount',
+		name: 'transactionAmount',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Amount of the goodwill credit',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['goodwillCredit'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'transactionAmount',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Payment Type ID',
+		name: 'paymentTypeId',
+		type: 'string',
+		default: '',
+		description: 'Payment type ID for the goodwill credit',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['goodwillCredit'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'paymentTypeId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'External ID',
+		name: 'externalId',
+		type: 'string',
+		default: '',
+		description: 'External identifier for the goodwill credit transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['goodwillCredit'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'externalId',
+				type: 'body',
+			},
+		},
+	},
+	{
+		displayName: 'Note',
+		name: 'note',
+		type: 'string',
+		default: '',
+		description: 'Note for the goodwill credit transaction',
+		displayOptions: {
+			show: {
+				resource: ['loan'],
+				operation: ['goodwillCredit'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'note',
+				type: 'body',
+			},
+		},
+	},
+];

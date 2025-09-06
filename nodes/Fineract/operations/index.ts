@@ -30,6 +30,18 @@ import {
 	loanApproveOperation,
 	loanDisburseOperation,
 	loanRepayOperation,
+	loanWaiveInterestOperation,
+	loanWriteOffOperation,
+	loanCloseOperation,
+	loanUndoWriteOffOperation,
+	loanRecoveryPaymentOperation,
+	loanRefundByCashOperation,
+	loanForeclosureOperation,
+	loanCreditBalanceRefundOperation,
+	loanChargeOffOperation,
+	loanDownPaymentOperation,
+	loanMerchantIssuedRefundOperation,
+	loanGoodwillCreditOperation,
 } from './loanOperations';
 
 // Unified Fineract operations for both Client and Loan resources
@@ -403,6 +415,150 @@ export const fineractOperations: INodeProperties[] = [
 					},
 				},
 			},
+			{
+				name: 'Waive Interest',
+				value: 'waiveInterest',
+				description: 'Waive interest on a loan',
+				action: 'Waive loan interest',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=waiveinterest',
+					},
+				},
+			},
+			{
+				name: 'Write Off',
+				value: 'writeOff',
+				description: 'Write off a loan',
+				action: 'Write off a loan',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=writeoff',
+					},
+				},
+			},
+			{
+				name: 'Close',
+				value: 'close',
+				description: 'Close a loan',
+				action: 'Close a loan',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=close',
+					},
+				},
+			},
+			{
+				name: 'Undo Write Off',
+				value: 'undoWriteOff',
+				description: 'Undo write off on a loan',
+				action: 'Undo loan write off',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=undowriteoff',
+					},
+				},
+			},
+			{
+				name: 'Recovery Payment',
+				value: 'recoveryPayment',
+				description: 'Record a recovery payment on a loan',
+				action: 'Record a recovery payment',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=recoverypayment',
+					},
+				},
+			},
+			{
+				name: 'Refund by Cash',
+				value: 'refundByCash',
+				description: 'Process a refund by cash',
+				action: 'Process cash refund',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=refundByCash',
+					},
+				},
+			},
+			{
+				name: 'Foreclosure',
+				value: 'foreclosure',
+				description: 'Foreclose a loan',
+				action: 'Foreclose a loan',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=foreclosure',
+					},
+				},
+			},
+			{
+				name: 'Credit Balance Refund',
+				value: 'creditBalanceRefund',
+				description: 'Process a credit balance refund',
+				action: 'Process credit balance refund',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=creditBalanceRefund',
+					},
+				},
+			},
+			{
+				name: 'Charge Off',
+				value: 'chargeOff',
+				description: 'Charge off a loan',
+				action: 'Charge off a loan',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=charge-off',
+					},
+				},
+			},
+			{
+				name: 'Down Payment',
+				value: 'downPayment',
+				description: 'Record a down payment on a loan',
+				action: 'Record a down payment',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=downPayment',
+					},
+				},
+			},
+			{
+				name: 'Merchant Issued Refund',
+				value: 'merchantIssuedRefund',
+				description: 'Process a merchant issued refund',
+				action: 'Process merchant issued refund',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=merchantIssuedRefund',
+					},
+				},
+			},
+			{
+				name: 'Goodwill Credit',
+				value: 'goodwillCredit',
+				description: 'Apply a goodwill credit to a loan',
+				action: 'Apply goodwill credit',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/loans/{{ $parameter.loanId }}/transactions?command=goodwillCredit',
+					},
+				},
+			},
 		],
 		default: 'list',
 	},
@@ -438,4 +594,16 @@ export const fineractFields: INodeProperties[] = [
 	...loanApproveOperation,
 	...loanDisburseOperation,
 	...loanRepayOperation,
+	...loanWaiveInterestOperation,
+	...loanWriteOffOperation,
+	...loanCloseOperation,
+	...loanUndoWriteOffOperation,
+	...loanRecoveryPaymentOperation,
+	...loanRefundByCashOperation,
+	...loanForeclosureOperation,
+	...loanCreditBalanceRefundOperation,
+	...loanChargeOffOperation,
+	...loanDownPaymentOperation,
+	...loanMerchantIssuedRefundOperation,
+	...loanGoodwillCreditOperation,
 ];
