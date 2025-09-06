@@ -1,11 +1,6 @@
 name: Publish to NPM
 
 on:
-  push:
-    tags:
-      - 'v*'
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       version:
@@ -51,37 +46,6 @@ jobs:
 
       - name: Run prepublish checks
         run: npm run prepublishOnly
-
-      - name: Publish to NPM (from patch commit)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          npm version patch --no-git-tag-version
-          NEW_VERSION=$(node -p "require('./package.json').version")
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-      - name: Create and push tag (from patch commit)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add package.json package-lock.json
-          git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
-          git tag "v${{ env.NEW_VERSION }}"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git push origin main
-          git push origin "v${{ env.NEW_VERSION }}"
-
-      - name: Publish to NPM (from patch commit)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish to NPM (from tag)
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Get version for manual publish
         if: github.event_name == 'workflow_dispatch'
