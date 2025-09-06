@@ -90,6 +90,18 @@ jobs:
     needs: test
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.15
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.15'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Publish to NPM
         run: npm publish
         env:
@@ -104,6 +116,15 @@ jobs:
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.15
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.15'
+          cache: 'npm'
+
       - name: Bump new patch version
         run: |
           npm version patch --no-git-tag-version
