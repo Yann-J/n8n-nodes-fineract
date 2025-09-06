@@ -93,6 +93,21 @@ npm run release:major  # Major release
 
 ### Common Issues
 
+#### Permission Denied Errors
+
+If you get "Permission to Yann-J/n8n-nodes-fineract.git denied to github-actions[bot]":
+
+**Quick Fix (Recommended):**
+
+1. Use the `publish-simple.yml` workflow instead
+2. Create tags manually: `git tag v1.0.0 && git push origin v1.0.0`
+
+**Alternative Fix:**
+
+1. Go to Repository Settings → Actions → General
+2. Under "Workflow permissions" select "Read and write permissions"
+3. Save the changes
+
 #### Build Failures
 
 ```bash

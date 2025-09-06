@@ -21,6 +21,10 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -63,6 +67,7 @@ jobs:
           git add package.json package-lock.json
           git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
           git tag "v${{ env.NEW_VERSION }}"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git push origin main
           git push origin "v${{ env.NEW_VERSION }}"
 
@@ -106,6 +111,7 @@ jobs:
           git add package.json package-lock.json
           git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
           git tag "v${{ env.NEW_VERSION }}"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git push origin main
           git push origin "v${{ env.NEW_VERSION }}"
 
