@@ -1,3 +1,4 @@
+/* eslint-disable n8n-nodes-base/node-class-description-icon-not-svg */
 import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
 import { fineractOperations, fineractFields } from './FineractDescription';
 
