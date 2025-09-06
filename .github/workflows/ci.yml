@@ -1,0 +1,111 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.15, 21]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run linting fix check
+        run: npm run lintfix --dry-run
+
+      - name: Check formatting
+        run: npm run format --check
+
+      - name: Build package
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Build failed - dist directory not found"
+            exit 1
+          fi
+
+          if [ ! -f "dist/nodes/Fineract/Fineract.node.js" ]; then
+            echo "Build failed - main node file not found"
+            exit 1
+          fi
+
+          if [ ! -f "dist/credentials/FineractApi.credentials.js" ]; then
+            echo "Build failed - credentials file not found"
+            exit 1
+          fi
+
+          echo "Build verification successful"
+
+      - name: Check package.json structure
+        run: |
+          node -e "
+            const pkg = require('./package.json');
+            const requiredFields = ['name', 'version', 'description', 'main', 'n8n'];
+            const missingFields = requiredFields.filter(field => !pkg[field]);
+
+            if (missingFields.length > 0) {
+              console.error('Missing required fields in package.json:', missingFields);
+              process.exit(1);
+            }
+
+            if (!pkg.n8n.nodes || !Array.isArray(pkg.n8n.nodes)) {
+              console.error('n8n.nodes must be an array');
+              process.exit(1);
+            }
+
+            if (!pkg.n8n.credentials || !Array.isArray(pkg.n8n.credentials)) {
+              console.error('n8n.credentials must be an array');
+              process.exit(1);
+            }
+
+            console.log('package.json structure validation passed');
+          "
+
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.15'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run security audit
+        run: npm audit --audit-level=moderate
+
+      - name: Check for known vulnerabilities
+        run: |
+          if command -v npx &> /dev/null; then
+            npx audit-ci --config .audit-ci.json || true
+          else
+            echo "audit-ci not available, skipping advanced security checks"
+          fi

@@ -27,9 +27,18 @@
 		"build": "npx rimraf dist && tsc && gulp build:icons",
 		"dev": "tsc --watch",
 		"format": "prettier nodes credentials --write",
+		"format:check": "prettier nodes credentials --check",
 		"lint": "eslint nodes credentials package.json",
 		"lintfix": "eslint nodes credentials package.json --fix",
-		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json"
+		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json",
+		"version:patch": "npm version patch",
+		"version:minor": "npm version minor",
+		"version:major": "npm version major",
+		"release:patch": "npm run version:patch && git push --follow-tags",
+		"release:minor": "npm run version:minor && git push --follow-tags",
+		"release:major": "npm run version:major && git push --follow-tags",
+		"test": "npm run lint && npm run format:check && npm run build",
+		"clean": "npx rimraf dist"
 	},
 	"files": [
 		"dist"
