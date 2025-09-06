@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.15, 21]
+        node-version: [20.15]
 
     steps:
       - name: Checkout code
@@ -138,16 +138,16 @@ jobs:
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      # - name: Create and push new tag (from patch commit)
-      #   run: |
-      #     git config --local user.email "action@github.com"
-      #     git config --local user.name "GitHub Action"
-      #     git add package.json package-lock.json
-      #     git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
-      #     git tag "v${{ env.NEW_VERSION }}"
-      #     git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-      #     git push origin main
-      #     git push origin "v${{ env.NEW_VERSION }}"
+      - name: Create and push new tag (from patch commit)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add package.json package-lock.json
+          git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
+          git tag "v${{ env.NEW_VERSION }}"
+          # git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git push origin main
+          git push origin "v${{ env.NEW_VERSION }}"
 
       - name: Run linting
         run: npm run lint
