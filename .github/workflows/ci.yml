@@ -126,6 +126,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.15'
+          registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
       - name: Install dependencies
@@ -137,16 +138,16 @@ jobs:
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Create and push new tag (from patch commit)
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add package.json package-lock.json
-          git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
-          git tag "v${{ env.NEW_VERSION }}"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git push origin main
-          git push origin "v${{ env.NEW_VERSION }}"
+      # - name: Create and push new tag (from patch commit)
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add package.json package-lock.json
+      #     git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
+      #     git tag "v${{ env.NEW_VERSION }}"
+      #     git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+      #     git push origin main
+      #     git push origin "v${{ env.NEW_VERSION }}"
 
       - name: Run linting
         run: npm run lint
@@ -157,10 +158,10 @@ jobs:
       - name: Run prepublish checks
         run: npm run prepublishOnly
 
-      - name: Verify NPM authentication
-        run: npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Verify NPM authentication
+      #   run: npm whoami
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM (from patch commit)
         run: npm publish
