@@ -118,6 +118,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js 20.15
         uses: actions/setup-node@v4
@@ -145,8 +148,19 @@ jobs:
           git push origin main
           git push origin "v${{ env.NEW_VERSION }}"
 
+      - name: Run linting
+        run: npm run lint
+
+      - name: Build package
+        run: npm run build
+
+      - name: Run prepublish checks
+        run: npm run prepublishOnly
+
       - name: Verify NPM authentication
         run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM (from patch commit)
         run: npm publish
